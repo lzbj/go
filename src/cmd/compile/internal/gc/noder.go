@@ -51,6 +51,7 @@ func parseFiles(filenames []string) uint {
 
 			p.file, _ = syntax.Parse(base, f, p.error, p.pragma, syntax.CheckBranches) // errors are tracked via p.error
 			if len(os.Getenv("XDBG")) > 0 {
+				fmt.Printf("XDBG='%s'\n", os.Getenv("XDBG"))
 				fmt.Println("Dumping", p.file.PkgName)
 				syntax.Fdump(os.Stderr, p.file)
 			}

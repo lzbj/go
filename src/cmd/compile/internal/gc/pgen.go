@@ -12,8 +12,10 @@ import (
 	"cmd/internal/objabi"
 	"cmd/internal/src"
 	"cmd/internal/sys"
+	"fmt"
 	"internal/race"
 	"math/rand"
+	"os"
 	"sort"
 	"sync"
 	"time"
@@ -234,6 +236,9 @@ func compile(fn *Node) {
 	walk(fn)
 	if nerrors != 0 {
 		return
+	}
+	if len(os.Getenv("XDBG")) >0{
+		fmt.Fprintf(os.Stderr, "fn after walk :\n% +v\n,fn")
 	}
 	if instrumenting {
 		instrument(fn)
